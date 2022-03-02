@@ -1,5 +1,7 @@
 const express = require('express');
 
+const { checkUser } = require('../../middlewares/authMiddleware');
+
 const authRouter = express.Router();
 
 const {
@@ -11,7 +13,7 @@ const {
 
 authRouter.post('/signup', httpPostSignup);
 authRouter.post('/login', httpPostLogin);
-authRouter.get('/me', httpGetUserInfo);
+authRouter.get('/me', checkUser, httpGetUserInfo);
 authRouter.get('/logout', httpGetLogout);
 
 module.exports = authRouter;
